@@ -1,9 +1,12 @@
 import "./App.scss";
+import LogIn from "./components/LogIn/Login";
 
 function App() {
   return (
     <>
-      <div className="hello">Hello</div>
+      <div className="app">
+        <LogIn></LogIn>
+      </div>
     </>
   );
 }
