@@ -1,14 +1,9 @@
 import "./App.scss";
-import LogIn from "./components/LogIn/Login";
+import { router } from "./routes/routes";
+import { RouterProvider } from "react-router-dom";
 
 function App() {
-  return (
-    <>
-      <div className="app">
-        <LogIn></LogIn>
-      </div>
-    </>
-  );
+  return <RouterProvider router={router}></RouterProvider>;
 }
 
 export default App;

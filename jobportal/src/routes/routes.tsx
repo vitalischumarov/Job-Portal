@@ -1,0 +1,15 @@
+import { createBrowserRouter } from "react-router-dom";
+import LogIn from "../components/LogIn/Login";
+import Home from "../components/Home/Home";
+
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <LogIn></LogIn>,
+    errorElement: <h1>error</h1>,
+  },
+  {
+    path: "/home",
+    element: <Home></Home>,
+  },
+]);

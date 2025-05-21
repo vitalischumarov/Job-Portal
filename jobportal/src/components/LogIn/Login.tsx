@@ -4,9 +4,10 @@ import InputField from "../InputField/InputField";
 
 export default function LogIn() {
   return (
-    <div>
+    <div className="app">
       <Button></Button>
-      <InputField></InputField>
+      <InputField textForPlaceholder="E-Mail"></InputField>
+      <InputField textForPlaceholder="Password"></InputField>
     </div>
   );
 }

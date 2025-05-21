@@ -1,5 +1,9 @@
 import "./InputField.scss";
 
-export default function InputField() {
-  return <input type="text"></input>;
+type PlaceholderMessage = {
+  textForPlaceholder: string;
+};
+
+export default function InputField({ textForPlaceholder }: PlaceholderMessage) {
+  return <input type="text" placeholder={textForPlaceholder}></input>;
 }

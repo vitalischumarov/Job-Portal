@@ -1,5 +1,6 @@
 import "./Button.scss";
+import { Link } from "react-router-dom";
 
 export default function Button() {
-  return <button>text</button>;
+  return <Link to={"/home"}>Log In</Link>;
 }
