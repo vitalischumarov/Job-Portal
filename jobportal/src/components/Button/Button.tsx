@@ -1,6 +1,11 @@
 import "./Button.scss";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Button() {
-  return <Link to={"/home"}>Log In</Link>;
+  const navigate = useNavigate();
+  function logIn() {
+    navigate("/home");
+  }
+
+  return <button onClick={logIn}>Log In</button>;
 }
