@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+
 export default function NewJobFormular() {
+  const navigate = useNavigate();
+
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [salary, setSalary] = useState<number>(0);
@@ -16,6 +19,11 @@ export default function NewJobFormular() {
 
   function typeSalaryHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setSalary(Number(event.target.value));
+  }
+
+  function saveTheTask() {
+    console.log("saved");
+    navigate("/home");
   }
 
   return (
@@ -45,6 +53,8 @@ export default function NewJobFormular() {
         onChange={typeSalaryHandler}
       />{" "}
       <span>CHF</span>
+      <br></br>
+      <button onClick={saveTheTask}>save</button>
     </div>
   );
 }
