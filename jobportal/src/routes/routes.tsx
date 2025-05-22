@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import LogIn from "../components/LogIn/Login";
 import Home from "../components/Home/Home";
+import NewJobFormular from "../components/NewJobFormular/NewJobFormular";
 
 export const router = createBrowserRouter([
   {
@@ -11,5 +12,9 @@ export const router = createBrowserRouter([
   {
     path: "/home",
     element: <Home></Home>,
+  },
+  {
+    path: "/newJobFormular",
+    element: <NewJobFormular></NewJobFormular>,
   },
 ]);
