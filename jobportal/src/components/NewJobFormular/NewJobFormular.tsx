@@ -23,7 +23,7 @@ export default function NewJobFormular() {
     setSalary(Number(event.target.value));
   }
 
-  function controlInput(
+  function validateInput(
     title: string,
     description: string,
     salary: number | undefined,
@@ -40,9 +40,16 @@ export default function NewJobFormular() {
   }
 
   function saveTheJob() {
-    const controlResult = controlInput(title, description, salary);
-    if (controlResult) {
-      console.log("validation process passed");
+    const validationResult = validateInput(title, description, salary);
+    if (validationResult) {
+      const newJob: JobType = {
+        title: title,
+        description: description,
+        salary: Number(salary),
+        publishedDay: new Date(),
+      };
+      console.log(newJob);
+      navigate("/home");
     } else {
       console.log("validation process of your inputs failed.");
     }

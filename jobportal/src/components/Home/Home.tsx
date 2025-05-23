@@ -2,23 +2,11 @@ import "./Home.scss";
 import { CompanyType } from "../../dataType/CompanyType";
 import { JobType } from "../../dataType/JobType";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function Home() {
   const navigate = useNavigate();
-  const jobs: JobType[] = [
-    {
-      title: "Lehrer",
-      description: "unterichten von Kindern",
-      salary: 70000,
-      publishedDay: new Date("2023-12-24"),
-    },
-    {
-      title: "Buchevangelist",
-      description: "Vereinigung Schweiz",
-      salary: 50000,
-      publishedDay: new Date("2025-12-24"),
-    },
-  ];
+  const [jobsList, setJobsList] = useState<JobType[]>([]);
 
   const companyExample: CompanyType = {
     name: "Gemeindeschule A bis Z",
@@ -26,7 +14,7 @@ export default function Home() {
     country: "Schweiz",
     employees: 10,
     email: "info@abisz.ch",
-    jobs: jobs,
+    jobs: jobsList,
   };
 
   function logOut() {
@@ -58,7 +46,7 @@ export default function Home() {
       </div>
       <hr />
       <button onClick={addNewJob}>add new job</button>
-      {companyExample.jobs.map((job) => {
+      {jobsList.map((job) => {
         return (
           <div>
             {job.title} : {job.description}
