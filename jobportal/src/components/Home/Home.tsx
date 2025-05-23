@@ -27,6 +27,10 @@ export default function Home() {
     setShowFormularPage(true);
   }
 
+  function setJobsListToTrue(setHomeScreen: boolean) {
+    setShowFormularPage(setHomeScreen);
+  }
+
   if (!showFormularPage) {
     return (
       <div>
@@ -63,6 +67,6 @@ export default function Home() {
     );
   } else {
     // der bool Wert muss uebergeben werden, damit er wieder auf false gesetzt werden kann.
-    return <NewJobFormular></NewJobFormular>;
+    return <NewJobFormular showHomePage={setJobsListToTrue}></NewJobFormular>;
   }
 }

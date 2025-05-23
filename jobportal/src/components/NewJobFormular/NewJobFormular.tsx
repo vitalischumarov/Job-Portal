@@ -1,12 +1,13 @@
 import "./NewJobFormular.scss";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { JobType } from "../../dataType/JobType";
 
-export default function NewJobFormular() {
-  const navigate = useNavigate();
+type HomeProp = {
+  showHomePage: (setHomeScreen: boolean) => void;
+};
 
+export default function NewJobFormular({ showHomePage }: HomeProp) {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [salary, setSalary] = useState<number | undefined>();
@@ -49,7 +50,7 @@ export default function NewJobFormular() {
         publishedDay: new Date(),
       };
       console.log(newJob);
-      navigate("/home");
+      showHomePage(false);
     } else {
       console.log("validation process of your inputs failed.");
     }
