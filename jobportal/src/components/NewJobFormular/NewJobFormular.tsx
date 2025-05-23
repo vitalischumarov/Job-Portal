@@ -1,13 +1,13 @@
 import "./NewJobFormular.scss";
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import { JobType } from "../../dataType/JobType";
 
 type HomeProp = {
   showHomePage: (setHomeScreen: boolean) => void;
+  addJob: (job: JobType) => void;
 };
 
-export default function NewJobFormular({ showHomePage }: HomeProp) {
+export default function NewJobFormular({ showHomePage, addJob }: HomeProp) {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [salary, setSalary] = useState<number | undefined>();
@@ -16,7 +16,9 @@ export default function NewJobFormular({ showHomePage }: HomeProp) {
     setTitle(event.target.value);
   }
 
-  function typeDescriptionHandler(event: React.ChangeEvent<HTMLInputElement>) {
+  function typeDescriptionHandler(
+    event: React.ChangeEvent<HTMLTextAreaElement>,
+  ) {
     setDescription(event.target.value);
   }
 
@@ -40,6 +42,10 @@ export default function NewJobFormular({ showHomePage }: HomeProp) {
     }
   }
 
+  function goBackToHomeScreen() {
+    showHomePage(false);
+  }
+
   function saveTheJob() {
     const validationResult = validateInput(title, description, salary);
     if (validationResult) {
@@ -50,6 +56,7 @@ export default function NewJobFormular({ showHomePage }: HomeProp) {
         publishedDay: new Date(),
       };
       console.log(newJob);
+      addJob(newJob);
       showHomePage(false);
     } else {
       console.log("validation process of your inputs failed.");
@@ -58,7 +65,7 @@ export default function NewJobFormular({ showHomePage }: HomeProp) {
 
   return (
     <div className="main">
-      <Link to={"/home"}>Back</Link>
+      <button onClick={goBackToHomeScreen}>go back</button>
       <div className="formular">
         <h3 className="formularText">Title of the job:</h3>
         <input
@@ -70,13 +77,12 @@ export default function NewJobFormular({ showHomePage }: HomeProp) {
           className="formularText formularInput"
         />
         <h3 className="formularText">Jobdescription:</h3>
-        <input
-          type="text"
+        <textarea
           placeholder="describe the job..."
           name="description"
           value={description}
           onChange={typeDescriptionHandler}
-          className="formularText formularInput"
+          className="formularText formularInput textArea"
         />
         <h3 className="formularText">What will the salary be in [CHF]:</h3>
         <input
@@ -84,7 +90,7 @@ export default function NewJobFormular({ showHomePage }: HomeProp) {
           name="salary"
           value={salary}
           onChange={typeSalaryHandler}
-          className="formularText formularInput"
+          className="formularText formularInput textarea"
         />
         <button onClick={saveTheJob} className="formularButton">
           save

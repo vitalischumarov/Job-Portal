@@ -23,12 +23,16 @@ export default function Home() {
     navigate("/");
   }
 
-  function addNewJob() {
+  function goToFormularPage() {
     setShowFormularPage(true);
   }
 
-  function setJobsListToTrue(setHomeScreen: boolean) {
+  function setShowFormularPageTrue(setHomeScreen: boolean) {
     setShowFormularPage(setHomeScreen);
+  }
+
+  function addNewJob(job: JobType) {
+    setJobsList([...jobsList, job]);
   }
 
   if (!showFormularPage) {
@@ -54,7 +58,7 @@ export default function Home() {
             <h3>{companyExample.email}</h3>
           </div>
           <hr />
-          <button onClick={addNewJob}>add new job</button>
+          <button onClick={goToFormularPage}>add new job</button>
           {jobsList.map((job) => {
             return (
               <div>
@@ -67,6 +71,11 @@ export default function Home() {
     );
   } else {
     // der bool Wert muss uebergeben werden, damit er wieder auf false gesetzt werden kann.
-    return <NewJobFormular showHomePage={setJobsListToTrue}></NewJobFormular>;
+    return (
+      <NewJobFormular
+        showHomePage={setShowFormularPageTrue}
+        addJob={addNewJob}
+      ></NewJobFormular>
+    );
   }
 }
