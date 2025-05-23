@@ -2,13 +2,14 @@ import "./NewJobFormular.scss";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { JobType } from "../../dataType/JobType";
 
 export default function NewJobFormular() {
   const navigate = useNavigate();
 
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [salary, setSalary] = useState<number>(0);
+  const [salary, setSalary] = useState<number | undefined>();
 
   function typeTitleHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setTitle(event.target.value);
@@ -22,9 +23,29 @@ export default function NewJobFormular() {
     setSalary(Number(event.target.value));
   }
 
-  function saveTheTask() {
-    console.log("saved");
-    navigate("/home");
+  function controlInput(
+    title: string,
+    description: string,
+    salary: number | undefined,
+  ): boolean {
+    if (salary === undefined) {
+      return false;
+    } else {
+      if (salary < 1 || title === "" || description === "") {
+        return false;
+      } else {
+        return true;
+      }
+    }
+  }
+
+  function saveTheJob() {
+    const controlResult = controlInput(title, description, salary);
+    if (controlResult) {
+      console.log("validation process passed");
+    } else {
+      console.log("validation process of your inputs failed.");
+    }
   }
 
   return (
@@ -57,7 +78,7 @@ export default function NewJobFormular() {
           onChange={typeSalaryHandler}
           className="formularText formularInput"
         />
-        <button onClick={saveTheTask} className="formularButton">
+        <button onClick={saveTheJob} className="formularButton">
           save
         </button>
       </div>
