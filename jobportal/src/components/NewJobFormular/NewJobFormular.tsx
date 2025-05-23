@@ -1,3 +1,4 @@
+import "./NewJobFormular.scss";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -27,34 +28,39 @@ export default function NewJobFormular() {
   }
 
   return (
-    <div>
+    <div className="main">
       <Link to={"/home"}>Back</Link>
-      <h3>Title of the job:</h3>
-      <input
-        type="text"
-        placeholder="title..."
-        name="title"
-        value={title}
-        onChange={typeTitleHandler}
-      />
-      <h3>Jobdescription:</h3>
-      <input
-        type="text"
-        placeholder="describe the job..."
-        name="description"
-        value={description}
-        onChange={typeDescriptionHandler}
-      />
-      <h3>What will the salary be:</h3>
-      <input
-        type="number"
-        name="salary"
-        value={salary}
-        onChange={typeSalaryHandler}
-      />{" "}
-      <span>CHF</span>
-      <br></br>
-      <button onClick={saveTheTask}>save</button>
+      <div className="formular">
+        <h3 className="formularText">Title of the job:</h3>
+        <input
+          type="text"
+          placeholder="title..."
+          name="title"
+          value={title}
+          onChange={typeTitleHandler}
+          className="formularText formularInput"
+        />
+        <h3 className="formularText">Jobdescription:</h3>
+        <input
+          type="text"
+          placeholder="describe the job..."
+          name="description"
+          value={description}
+          onChange={typeDescriptionHandler}
+          className="formularText formularInput"
+        />
+        <h3 className="formularText">What will the salary be in [CHF]:</h3>
+        <input
+          type="number"
+          name="salary"
+          value={salary}
+          onChange={typeSalaryHandler}
+          className="formularText formularInput"
+        />
+        <button onClick={saveTheTask} className="formularButton">
+          save
+        </button>
+      </div>
     </div>
   );
 }

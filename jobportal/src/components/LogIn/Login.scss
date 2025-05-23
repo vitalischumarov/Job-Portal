@@ -1,12 +1,11 @@
-$main-color: #afddff;
-$second-color: #60b5ff;
+@use "../../styles/variables.scss" as variables;
 
 * {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 .app {
-  width: 100%;
-  height: 100vh;
-  background-color: $main-color;
+    width: 100%;
+    height: 100vh;
+    background-color: variables.$main-color;
 }
