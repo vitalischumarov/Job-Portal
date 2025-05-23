@@ -3,10 +3,12 @@ import { CompanyType } from "../../dataType/CompanyType";
 import { JobType } from "../../dataType/JobType";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import NewJobFormular from "../NewJobFormular/NewJobFormular";
 
 export default function Home() {
   const navigate = useNavigate();
   const [jobsList, setJobsList] = useState<JobType[]>([]);
+  const [showFormularPage, setShowFormularPage] = useState<boolean>(false);
 
   const companyExample: CompanyType = {
     name: "Gemeindeschule A bis Z",
@@ -22,37 +24,45 @@ export default function Home() {
   }
 
   function addNewJob() {
-    navigate("/newJobFormular");
+    setShowFormularPage(true);
   }
 
-  return (
-    <div>
-      <button onClick={logOut}>Log Out</button>
+  if (!showFormularPage) {
+    return (
       <div>
-        <h2>Name of the missionary company:</h2>
-        <h2>{companyExample.name}</h2>
-      </div>
-      <div>
-        <h3>Description:</h3>
-        <h3>{companyExample.description}</h3>
-      </div>
-      <div>
-        <h3>Country:</h3>
-        <h3>{companyExample.country}</h3>
-      </div>
-      <div>
-        <h3>E-mail contact:</h3>
-        <h3>{companyExample.email}</h3>
-      </div>
-      <hr />
-      <button onClick={addNewJob}>add new job</button>
-      {jobsList.map((job) => {
-        return (
+        <div>
+          {" "}
+          <button onClick={logOut}>Log Out</button>
           <div>
-            {job.title} : {job.description}
+            <h2>Name of the missionary company:</h2>
+            <h2>{companyExample.name}</h2>
           </div>
-        );
-      })}
-    </div>
-  );
+          <div>
+            <h3>Description:</h3>
+            <h3>{companyExample.description}</h3>
+          </div>
+          <div>
+            <h3>Country:</h3>
+            <h3>{companyExample.country}</h3>
+          </div>
+          <div>
+            <h3>E-mail contact:</h3>
+            <h3>{companyExample.email}</h3>
+          </div>
+          <hr />
+          <button onClick={addNewJob}>add new job</button>
+          {jobsList.map((job) => {
+            return (
+              <div>
+                {job.title} : {job.description}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  } else {
+    // der bool Wert muss uebergeben werden, damit er wieder auf false gesetzt werden kann.
+    return <NewJobFormular></NewJobFormular>;
+  }
 }
