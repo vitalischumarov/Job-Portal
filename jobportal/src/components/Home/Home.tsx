@@ -4,6 +4,7 @@ import { JobType } from "../../dataType/JobType";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import NewJobFormular from "../NewJobFormular/NewJobFormular";
+import JobCard from "../JobCard/JobCard";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -59,9 +60,10 @@ export default function Home() {
           <button onClick={goToFormularPage}>add new job</button>
           {jobsList.map((job) => {
             return (
-              <div>
-                {job.title} : {job.description}
-              </div>
+              <JobCard
+                title={job.title}
+                description={job.description}
+              ></JobCard>
             );
           })}
         </div>
