@@ -37,25 +37,23 @@ export default function Home() {
 
   if (!showFormularPage) {
     return (
-      <div>
-        <div>
+      <div className="app">
+        <div className="container">
           {" "}
-          <button onClick={logOut}>Log Out</button>
-          <div>
-            <h2>Name of the missionary company:</h2>
+          <button className="logout-btn" onClick={logOut}>
+            Log Out
+          </button>
+          <div className="info-section">
             <h2>{companyExample.name}</h2>
           </div>
-          <div>
-            <h3>Description:</h3>
-            <h3>{companyExample.description}</h3>
+          <div className="info-section">
+            <h3>Description: {companyExample.description}</h3>
           </div>
-          <div>
-            <h3>Country:</h3>
-            <h3>{companyExample.country}</h3>
+          <div className="info-section">
+            <h3>Country: {companyExample.country}</h3>
           </div>
-          <div>
-            <h3>E-mail contact:</h3>
-            <h3>{companyExample.email}</h3>
+          <div className="info-section">
+            <h3>E-mail contact: {companyExample.email}</h3>
           </div>
           <hr />
           <button onClick={goToFormularPage}>add new job</button>

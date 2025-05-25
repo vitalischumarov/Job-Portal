@@ -90,7 +90,7 @@ export default function NewJobFormular({ showHomePage, addJob }: HomeProp) {
           name="salary"
           value={salary}
           onChange={typeSalaryHandler}
-          className="formularText formularInput textarea"
+          className="formularText formularInput"
         />
         <button onClick={saveTheJob} className="formularButton">
           save
