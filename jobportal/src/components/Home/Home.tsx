@@ -58,14 +58,16 @@ export default function Home() {
           </div>
           <hr />
           <button onClick={goToFormularPage}>add new job</button>
-          {jobsList.map((job) => {
-            return (
-              <JobCard
-                title={job.title}
-                description={job.description}
-              ></JobCard>
-            );
-          })}
+          <div className="jobList">
+            {jobsList.map((job) => {
+              return (
+                <JobCard
+                  title={job.title}
+                  description={job.description}
+                ></JobCard>
+              );
+            })}
+          </div>
         </div>
       </div>
     );
