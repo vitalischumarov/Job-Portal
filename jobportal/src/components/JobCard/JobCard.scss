@@ -6,7 +6,9 @@
     margin-top: 1rem;
     box-shadow: 4px 4px 10px black;
     width: 40%;
-
+    :hover {
+        cursor: pointer;
+    }
     h4 {
         word-wrap: break-word;
     }

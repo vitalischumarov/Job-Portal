@@ -1,9 +1,10 @@
 import "./NewJobFormular.scss";
 import { useState } from "react";
 import { JobType } from "../../dataType/JobType";
+import { Page } from "../../dataType/enumPage";
 
 type HomeProp = {
-  showHomePage: (setHomeScreen: boolean) => void;
+  showHomePage: (setHomeScreen: string) => void;
   addJob: (job: JobType) => void;
 };
 
@@ -43,13 +44,14 @@ export default function NewJobFormular({ showHomePage, addJob }: HomeProp) {
   }
 
   function goBackToHomeScreen() {
-    showHomePage(false);
+    showHomePage(Page.Home);
   }
 
   function saveTheJob() {
     const validationResult = validateInput(title, description, salary);
     if (validationResult) {
       const newJob: JobType = {
+        id: Math.random(),
         title: title,
         description: description,
         salary: Number(salary),
@@ -57,7 +59,7 @@ export default function NewJobFormular({ showHomePage, addJob }: HomeProp) {
       };
       console.log(newJob);
       addJob(newJob);
-      showHomePage(false);
+      showHomePage(Page.Home);
     } else {
       console.log("validation process of your inputs failed.");
     }

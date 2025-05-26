@@ -5,11 +5,14 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import NewJobFormular from "../NewJobFormular/NewJobFormular";
 import JobCard from "../JobCard/JobCard";
+import { Page } from "../../dataType/enumPage";
+import EditJob from "../EditJob/EditJob";
 
 export default function Home() {
   const navigate = useNavigate();
   const [jobsList, setJobsList] = useState<JobType[]>([]);
-  const [showFormularPage, setShowFormularPage] = useState<boolean>(false);
+  const [showPage, setShowPage] = useState<string>(Page.Home);
+  const [jobId, setJobId] = useState<number>(0);
 
   const companyExample: CompanyType = {
     name: "Gemeindeschule A bis Z",
@@ -25,18 +28,29 @@ export default function Home() {
   }
 
   function goToFormularPage() {
-    setShowFormularPage(true);
+    setShowPage(Page.NewJobFormular);
   }
 
-  function setShowFormularPageTrue(setHomeScreen: boolean) {
-    setShowFormularPage(setHomeScreen);
+  function setShowFormularPageTrue(setHomeScreen: string) {
+    setShowPage(setHomeScreen);
   }
 
   function addNewJob(job: JobType) {
     setJobsList([...jobsList, job]);
   }
 
-  if (!showFormularPage) {
+  function clickOnJobCard(id: number) {
+    setJobId(id);
+    setShowPage(Page.EditJob);
+  }
+
+  function findTheJob(): JobType | undefined {
+    return jobsList.find((job) => {
+      return job.id === jobId;
+    });
+  }
+
+  if (showPage === Page.Home) {
     return (
       <div className="app">
         <div className="container">
@@ -61,23 +75,31 @@ export default function Home() {
           <div className="jobList">
             {jobsList.map((job) => {
               return (
-                <JobCard
-                  title={job.title}
-                  description={job.description}
-                ></JobCard>
+                <div
+                  onClick={() => {
+                    clickOnJobCard(job.id);
+                  }}
+                >
+                  <JobCard
+                    title={job.title}
+                    description={job.description}
+                  ></JobCard>
+                </div>
               );
             })}
           </div>
         </div>
       </div>
     );
-  } else {
-    // der bool Wert muss uebergeben werden, damit er wieder auf false gesetzt werden kann.
+  } else if (showPage === Page.NewJobFormular) {
     return (
       <NewJobFormular
         showHomePage={setShowFormularPageTrue}
         addJob={addNewJob}
       ></NewJobFormular>
     );
+  } else if (showPage === Page.EditJob) {
+    const job = findTheJob();
+    return <EditJob job={job}></EditJob>;
   }
 }
