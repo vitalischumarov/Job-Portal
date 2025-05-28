@@ -1,15 +1,34 @@
+import { JobType } from "../../dataType/JobType";
 import "./JobCard.scss";
 
 type HomeProp = {
-  title: string;
-  description: string;
+  job: JobType;
+  clickFunction: (job: number) => void;
+  deleteFunction: (job: number) => void;
 };
 
-export default function JobCard({ title, description }: HomeProp) {
+export default function JobCard({
+  job,
+  clickFunction,
+  deleteFunction,
+}: HomeProp) {
   return (
-    <div className="job-card">
-      <h3>Title: {title}</h3>
-      <h4>Description: {description}</h4>
+    <div>
+      <div
+        onClick={() => {
+          clickFunction(job.id);
+        }}
+        className="job-card"
+      >
+        <h3>Title: {job.title}</h3>
+      </div>
+      <button
+        onClick={() => {
+          deleteFunction(job.id);
+        }}
+      >
+        delete job
+      </button>
     </div>
   );
 }

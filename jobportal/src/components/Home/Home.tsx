@@ -44,7 +44,7 @@ export default function Home() {
     setShowPage(Page.EditJob);
   }
 
-  function findTheJob(): JobType | undefined {
+  function getTheJob(): JobType | undefined {
     return jobsList.find((job) => {
       return job.id === jobId;
     });
@@ -59,6 +59,10 @@ export default function Home() {
       }
     }
     setJobsList(jobsList);
+  }
+
+  function deleteJob(id: number) {
+    console.log(`this job was deleted: ${id}`);
   }
 
   if (showPage === Page.Home) {
@@ -86,14 +90,11 @@ export default function Home() {
           <div className="jobList">
             {jobsList.map((job) => {
               return (
-                <div
-                  onClick={() => {
-                    clickOnJobCard(job.id);
-                  }}
-                >
+                <div>
                   <JobCard
-                    title={job.title}
-                    description={job.description}
+                    job={job}
+                    clickFunction={clickOnJobCard}
+                    deleteFunction={deleteJob}
                   ></JobCard>
                 </div>
               );
@@ -110,7 +111,7 @@ export default function Home() {
       ></NewJobFormular>
     );
   } else if (showPage === Page.EditJob) {
-    const job = findTheJob();
+    const job = getTheJob();
     return (
       <EditJob
         job={job}
