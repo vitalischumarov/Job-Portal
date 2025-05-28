@@ -100,6 +100,6 @@ export default function Home() {
     );
   } else if (showPage === Page.EditJob) {
     const job = findTheJob();
-    return <EditJob job={job}></EditJob>;
+    return <EditJob job={job} showHomePage={setShowFormularPageTrue}></EditJob>;
   }
 }
