@@ -4,4 +4,5 @@ export type JobType = {
   description: string;
   salary: number;
   publishedDay: Date;
+  company: string;
 };

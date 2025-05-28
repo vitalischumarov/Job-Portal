@@ -6,9 +6,14 @@ import { Page } from "../../dataType/enumPage";
 type HomeProp = {
   showHomePage: (setHomeScreen: string) => void;
   addJob: (job: JobType) => void;
+  companyName: string;
 };
 
-export default function NewJobFormular({ showHomePage, addJob }: HomeProp) {
+export default function NewJobFormular({
+  showHomePage,
+  addJob,
+  companyName,
+}: HomeProp) {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [salary, setSalary] = useState<number | undefined>();
@@ -55,6 +60,7 @@ export default function NewJobFormular({ showHomePage, addJob }: HomeProp) {
         title: title,
         description: description,
         salary: Number(salary),
+        company: companyName,
         publishedDay: new Date(),
       };
       console.log(newJob);

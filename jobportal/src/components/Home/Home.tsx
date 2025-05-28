@@ -62,7 +62,8 @@ export default function Home() {
   }
 
   function deleteJob(id: number) {
-    console.log(`this job was deleted: ${id}`);
+    const newList = jobsList.filter((job) => job.id !== id);
+    setJobsList(newList);
   }
 
   if (showPage === Page.Home) {
@@ -108,6 +109,7 @@ export default function Home() {
       <NewJobFormular
         showHomePage={setShowFormularPageTrue}
         addJob={addNewJob}
+        companyName={companyExample.name}
       ></NewJobFormular>
     );
   } else if (showPage === Page.EditJob) {
