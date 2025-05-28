@@ -50,6 +50,17 @@ export default function Home() {
     });
   }
 
+  function getChangedJob(job: JobType) {
+    for (let i = 0; i < jobsList.length; i++) {
+      if (jobsList[i].id === job.id) {
+        jobsList[i].title = job.title;
+        jobsList[i].description = job.description;
+        jobsList[i].salary = job.salary;
+      }
+    }
+    setJobsList(jobsList);
+  }
+
   if (showPage === Page.Home) {
     return (
       <div className="app">
@@ -100,6 +111,12 @@ export default function Home() {
     );
   } else if (showPage === Page.EditJob) {
     const job = findTheJob();
-    return <EditJob job={job} showHomePage={setShowFormularPageTrue}></EditJob>;
+    return (
+      <EditJob
+        job={job}
+        showHomePage={setShowFormularPageTrue}
+        changeJobFunction={getChangedJob}
+      ></EditJob>
+    );
   }
 }

@@ -6,32 +6,33 @@ import { useState } from "react";
 type HomeProp = {
   job: JobType | undefined;
   showHomePage: (setHomeScreen: string) => void;
+  changeJobFunction: (job: JobType) => void;
 };
 
-export default function EditJob({ job, showHomePage }: HomeProp) {
+export default function EditJob({
+  job,
+  showHomePage,
+  changeJobFunction,
+}: HomeProp) {
   const [editPossible, setEditPossible] = useState<boolean>(false);
-  const [title, setTitle] = useState<string | undefined>(job?.title);
-  const [description, setDescription] = useState<string | undefined>(
+  const [newTitle, setNewTitle] = useState<string | undefined>(job?.title);
+  const [newDescription, setNewDescription] = useState<string | undefined>(
     job?.description,
   );
-  const [salary, setSalary] = useState<number | undefined>(job?.salary);
-
-  if (job === undefined) {
-    return;
-  }
+  const [newSalary, setNewSalary] = useState<number | undefined>(job?.salary);
 
   function typeTitleHandler(event: React.ChangeEvent<HTMLInputElement>) {
-    setTitle(event.target.value);
+    setNewTitle(event.target.value);
   }
 
   function typeDescriptionHandler(
     event: React.ChangeEvent<HTMLTextAreaElement>,
   ) {
-    setDescription(event.target.value);
+    setNewDescription(event.target.value);
   }
 
   function typeSalaryHandler(event: React.ChangeEvent<HTMLInputElement>) {
-    setSalary(Number(event.target.value));
+    setNewSalary(Number(event.target.value));
   }
 
   function goBackToHomeScreen() {
@@ -46,17 +47,42 @@ export default function EditJob({ job, showHomePage }: HomeProp) {
     }
   }
 
-  function saveChanges() {}
+  function saveChanges() {
+    if (newTitle === undefined) {
+      return;
+    }
+    if (newDescription === undefined) {
+      return;
+    }
+    if (newSalary === undefined) {
+      return;
+    }
+    if (job === undefined) {
+      return;
+    }
+    if (job.id === undefined) {
+      return;
+    }
+    const newJob = {
+      title: newTitle,
+      description: newDescription,
+      salary: newSalary,
+      id: job.id,
+      publishedDay: job.publishedDay,
+    };
+    changeJobFunction(newJob);
+    goBackToHomeScreen();
+  }
   if (!editPossible) {
     return (
       <div>
         <button onClick={goBackToHomeScreen}>back to home screen</button>
         <button onClick={editJob}>edit job</button>
-        {title}
+        {newTitle}
         <br></br>
-        {description}
+        {newDescription}
         <br></br>
-        {salary}
+        {newSalary}
         <br></br>
       </div>
     );
@@ -66,14 +92,14 @@ export default function EditJob({ job, showHomePage }: HomeProp) {
         <button onClick={goBackToHomeScreen}>back to home screen</button>
         <button onClick={editJob}>edit job</button>
         <button onClick={saveChanges}>save changed</button>
-        <input value={title} onChange={typeTitleHandler}></input>
+        <input value={newTitle} onChange={typeTitleHandler}></input>
         <br></br>
         <textarea
-          value={description}
+          value={newDescription}
           onChange={typeDescriptionHandler}
         ></textarea>
         <br></br>
-        <input value={salary} onChange={typeSalaryHandler}></input>
+        <input value={newSalary} onChange={typeSalaryHandler}></input>
         <br></br>
       </div>
     );
