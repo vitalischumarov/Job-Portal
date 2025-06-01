@@ -3,6 +3,7 @@ import LogIn from "../components/LogIn/Login";
 import Home from "../components/Home/Home";
 import NewJobFormular from "../components/NewJobFormular/NewJobFormular";
 import JobsOverview from "../components/JobsOverview/JobsOverview";
+import RegisterFormular from "../components/RegisterFormular/RegisterFormular";
 
 export const router = createBrowserRouter([
   {
@@ -21,5 +22,9 @@ export const router = createBrowserRouter([
   {
     path: "/jobsOverview",
     element: <JobsOverview></JobsOverview>,
+  },
+  {
+    path: "/registrieren",
+    element: <RegisterFormular></RegisterFormular>,
   },
 ]);

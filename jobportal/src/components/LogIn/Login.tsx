@@ -10,6 +10,7 @@ export default function LogIn() {
       <InputField textForPlaceholder="E-Mail"></InputField>
       <InputField textForPlaceholder="Password"></InputField>
       <Link to={"./jobsOverview"}>weiter als Bewerber</Link>
+      <Link to={"/registrieren"}>Sign up</Link>
     </div>
   );
 }
