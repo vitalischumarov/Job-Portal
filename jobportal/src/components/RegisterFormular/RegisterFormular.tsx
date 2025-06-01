@@ -1,11 +1,9 @@
 import { useState } from "react";
+import { supabase } from "../../supabase-client ";
 
 export default function RegisterFormular() {
   const [email, setEmail] = useState<string>("");
-  const [passwort, setPassword] = useState<string>("");
-  const [companyName, setCompanyName] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
-  const [employees, setEmployees] = useState<string>("0");
+  const [password, setPassword] = useState<string>("");
 
   function typeEmailHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setEmail(event.target.value);
@@ -15,18 +13,19 @@ export default function RegisterFormular() {
     setPassword(event.target.value);
   }
 
-  function typeCompanyNameHandler(event: React.ChangeEvent<HTMLInputElement>) {
-    setCompanyName(event.target.value);
-  }
-
-  function typeDescriptionHandler(
-    event: React.ChangeEvent<HTMLTextAreaElement>,
-  ) {
-    setDescription(event.target.value);
-  }
-
-  function typeEmployeesHandler(event: React.ChangeEvent<HTMLInputElement>) {
-    setEmployees(event.target.value);
+  async function signUp() {
+    const { error, data } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+    if (error) {
+      console.log(`error: ${error}`);
+    }
+    if (data) {
+      console.log("successfully registered");
+      setEmail("");
+      setPassword("");
+    }
   }
 
   return (
@@ -36,28 +35,10 @@ export default function RegisterFormular() {
       <h2>Password:</h2>
       <input
         type="password"
-        value={passwort}
+        value={password}
         onChange={typePasswordHandler}
       ></input>
-      <h2>Organisation name:</h2>
-      <input
-        type="text"
-        value={companyName}
-        onChange={typeCompanyNameHandler}
-      ></input>
-      <h2>Description:</h2>
-      <textarea
-        placeholder="What does your organisation do?"
-        value={description}
-        onChange={typeDescriptionHandler}
-      ></textarea>
-      <h2>Number of employees:</h2>
-      <input
-        type="number"
-        value={employees}
-        onChange={typeEmployeesHandler}
-      ></input>
-      <button>Sign up</button>
+      <button onClick={signUp}>Sign up</button>
     </div>
   );
 }
