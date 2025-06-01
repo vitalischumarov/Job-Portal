@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { supabase } from "../../supabase-client ";
+import { useNavigate } from "react-router";
 
 export default function RegisterFormular() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const navigate = useNavigate();
 
   function typeEmailHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setEmail(event.target.value);
@@ -25,6 +27,7 @@ export default function RegisterFormular() {
       console.log("successfully registered");
       setEmail("");
       setPassword("");
+      navigate("/newCompany"); //hier muss ich die E-Mail adresse uebergeben.
     }
   }
 

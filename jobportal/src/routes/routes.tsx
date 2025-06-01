@@ -4,6 +4,7 @@ import Home from "../components/Home/Home";
 import NewJobFormular from "../components/NewJobFormular/NewJobFormular";
 import JobsOverview from "../components/JobsOverview/JobsOverview";
 import RegisterFormular from "../components/RegisterFormular/RegisterFormular";
+import CompanyFormular from "../components/CompanyFormular/CompanyFormular";
 
 export const router = createBrowserRouter([
   {
@@ -26,5 +27,9 @@ export const router = createBrowserRouter([
   {
     path: "/registrieren",
     element: <RegisterFormular></RegisterFormular>,
+  },
+  {
+    path: "/newCompany",
+    element: <CompanyFormular></CompanyFormular>,
   },
 ]);
