@@ -82,7 +82,6 @@ export default function NewJobFormular({
           name="title"
           value={title}
           onChange={typeTitleHandler}
-          className="formularText formularInput"
         />
         <h3 className="formularText">Jobdescription:</h3>
         <textarea
@@ -90,7 +89,6 @@ export default function NewJobFormular({
           name="description"
           value={description}
           onChange={typeDescriptionHandler}
-          className="formularText formularInput textArea"
         />
         <h3 className="formularText">What will the salary be in [CHF]:</h3>
         <input
@@ -98,7 +96,6 @@ export default function NewJobFormular({
           name="salary"
           value={salary}
           onChange={typeSalaryHandler}
-          className="formularText formularInput"
         />
         <button onClick={saveTheJob} className="formularButton">
           save

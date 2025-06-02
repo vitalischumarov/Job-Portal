@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
     element: <RegisterFormular></RegisterFormular>,
   },
   {
-    path: "/newCompany",
+    path: "/newCompany/:itemID",
     element: <CompanyFormular></CompanyFormular>,
   },
 ]);

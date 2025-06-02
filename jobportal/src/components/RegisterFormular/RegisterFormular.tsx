@@ -25,9 +25,10 @@ export default function RegisterFormular() {
     }
     if (data) {
       console.log("successfully registered");
+      const emailName = email;
       setEmail("");
       setPassword("");
-      navigate("/newCompany"); //hier muss ich die E-Mail adresse uebergeben.
+      navigate(`/newCompany/${emailName}`); //hier muss ich die E-Mail adresse uebergeben.
     }
   }
 
