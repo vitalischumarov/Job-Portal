@@ -6,5 +6,4 @@ export type CompanyType = {
   country: string;
   employees: number;
   email: string;
-  jobs: JobType[];
 };

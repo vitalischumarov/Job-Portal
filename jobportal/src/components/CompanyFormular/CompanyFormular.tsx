@@ -1,5 +1,7 @@
 import { useParams } from "react-router";
 import { useInput } from "../../hooks/useInput";
+import { CompanyType } from "../../dataType/CompanyType";
+import { supabase } from "../../supabase-client ";
 
 export default function CompanyFormular() {
   const { itemID } = useParams();
@@ -13,7 +15,7 @@ export default function CompanyFormular() {
   }
 
   function typeDescriptionHandler(
-    event: React.ChangeEvent<HTMLTextAreaElement>,
+    event: React.ChangeEvent<HTMLTextAreaElement>
   ) {
     setDescription(event.target.value);
   }
@@ -28,6 +30,29 @@ export default function CompanyFormular() {
       return;
     } else {
       setEmployee(event.target.value);
+    }
+  }
+
+  async function inputValidation() {
+    if (
+      companyname === "" ||
+      description === "" ||
+      country === "" ||
+      employee === ""
+    ) {
+      return;
+    } else {
+      const company: CompanyType = {
+        name: companyname,
+        description: description,
+        country: country,
+        employees: Number(employee),
+        email: String(itemID),
+      };
+      const { error } = await supabase.from("Company").insert(company).single();
+      if (error) {
+        console.log(error);
+      }
     }
   }
 
@@ -62,7 +87,7 @@ export default function CompanyFormular() {
         name="employee"
         value={employee}
       ></input>
-      <button>save</button>
+      <button onClick={inputValidation}>save</button>
     </div>
   );
 }

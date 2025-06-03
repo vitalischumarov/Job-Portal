@@ -15,16 +15,24 @@ export default function RegisterFormular() {
     setPassword(event.target.value);
   }
 
+  function inputValidation() {
+    if (email === "" || password === "") {
+      return;
+    } else {
+      signUp();
+    }
+  }
+
   async function signUp() {
     const { error, data } = await supabase.auth.signUp({
       email,
       password,
     });
     if (error) {
-      console.log(`error: ${error}`);
+      alert(`error: ${error}`);
+      return;
     }
     if (data) {
-      console.log("successfully registered");
       const emailName = email;
       setEmail("");
       setPassword("");
@@ -42,7 +50,7 @@ export default function RegisterFormular() {
         value={password}
         onChange={typePasswordHandler}
       ></input>
-      <button onClick={signUp}>Sign up</button>
+      <button onClick={inputValidation}>Sign up</button>
     </div>
   );
 }
