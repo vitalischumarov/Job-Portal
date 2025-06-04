@@ -2,6 +2,7 @@ import { useParams } from "react-router";
 import { useInput } from "../../hooks/useInput";
 import { CompanyType } from "../../dataType/CompanyType";
 import { supabase } from "../../supabase-client ";
+import { useNavigate } from "react-router-dom";
 
 export default function CompanyFormular() {
   const { itemID } = useParams();
@@ -9,6 +10,7 @@ export default function CompanyFormular() {
   const [description, setDescription] = useInput("");
   const [country, setCountry] = useInput("");
   const [employee, setEmployee] = useInput("1");
+  const navigate = useNavigate();
 
   function typeCompanynameHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setCompanyname(event.target.value);
@@ -53,6 +55,8 @@ export default function CompanyFormular() {
       if (error) {
         console.log(error);
       }
+      alert("Sie duerfen sich jetzt einloggen.");
+      navigate("/");
     }
   }
 

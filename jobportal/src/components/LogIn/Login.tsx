@@ -1,26 +1,61 @@
 import "./Login.scss";
-import Button from "../Button/Button";
-import InputField from "../InputField/InputField";
 import { Link } from "react-router";
-import { useEffect, useState } from "react";
+import { supabase } from "../../supabase-client ";
+import { useState } from "react";
+import Home from "../Home/Home";
 
 export default function LogIn() {
-  const [springBoot, setSpringBoot] = useState("");
+  const [email, setEmail] = useState("vitali@ccc.ch");
+  const [password, setPassword] = useState("123456789");
+  const [isLogedIn, setIsLogedIn] = useState<boolean>(false);
+  const [sessionUser, setSessionUser] = useState<String>("");
 
-  useEffect(() => {
-    fetch("http://localhost:8080/api/demo/message")
-      .then((response) => response.text())
-      .then((data) => setSpringBoot(data));
-  }, []);
+  async function login() {
+    const { error, data } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    if (error) {
+      console.log(`error-message: ${error}`);
+      return;
+    }
+    if (data) {
+      console.log(data.user.email);
+      setSessionUser(String(data.user.email));
+      setIsLogedIn(true);
+    }
+  }
 
-  return (
-    <div className="app">
-      <Button></Button>
-      <InputField textForPlaceholder="E-Mail"></InputField>
-      <InputField textForPlaceholder="Password"></InputField>
-      <Link to={"./jobsOverview"}>weiter als Bewerber</Link>
-      <Link to={"/registrieren"}>Sign up</Link>
-      <h4>{springBoot}</h4>
-    </div>
-  );
+  function logOut() {
+    setIsLogedIn(false);
+  }
+
+  function typeEmailHandler(event: React.ChangeEvent<HTMLInputElement>) {
+    setEmail(event.target.value);
+  }
+
+  function typePasswordHandler(event: React.ChangeEvent<HTMLInputElement>) {
+    setPassword(event.target.value);
+  }
+
+  if (!isLogedIn) {
+    return (
+      <div className="app">
+        <input
+          value={email}
+          placeholder="email"
+          onChange={typeEmailHandler}
+        ></input>
+        <input
+          value={password}
+          placeholder="password"
+          onChange={typePasswordHandler}
+        ></input>
+        <button onClick={login}>Login</button>
+        <Link to={"/registrieren"}>Sign up</Link>
+      </div>
+    );
+  } else {
+    return <Home logout={logOut} user={sessionUser}></Home>;
+  }
 }

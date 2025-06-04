@@ -1,30 +1,60 @@
 import "./Home.scss";
 import { CompanyType } from "../../dataType/CompanyType";
 import { JobType } from "../../dataType/JobType";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NewJobFormular from "../NewJobFormular/NewJobFormular";
 import JobCard from "../JobCard/JobCard";
 import { Page } from "../../dataType/enumPage";
 import EditJob from "../EditJob/EditJob";
+import { supabase } from "../../supabase-client ";
 
-export default function Home() {
-  const navigate = useNavigate();
+type LogProp = {
+  logout: () => void;
+  user: string;
+};
+
+export default function Home({ logout, user }: LogProp) {
   const [jobsList, setJobsList] = useState<JobType[]>([]);
   const [showPage, setShowPage] = useState<string>(Page.Home);
   const [jobId, setJobId] = useState<number>(0);
+  // const [name, setName] = useState<string>("");
+  // const [description, setDescription] = useState<string>("");
+  // const [country, setCountry] = useState<string>("");
+  // const [employees, setEmployees] = useState<string>("");
+  // const [email, setEmail] = useState<string>("");
+  const [company, setCompany] = useState<CompanyType>({
+    name: "",
+    description: "",
+    country: "",
+    employees: 0,
+    email: "",
+  });
 
-  const companyExample: CompanyType = {
-    name: "Gemeindeschule A bis Z",
-    description: "Adventistische Schule",
-    country: "Schweiz",
-    employees: 10,
-    email: "info@abisz.ch",
-    jobs: jobsList,
-  };
+  useEffect(() => {
+    async function fetchCompanyData() {
+      const { error, data } = await supabase
+        .from("Company")
+        .select()
+        .eq("email", user);
+      if (error) {
+        console.log(`error: ${error}`);
+      }
+      if (data) {
+        setCompany({
+          name: data[0].name,
+          description: data[0].description,
+          country: data[0].country,
+          employees: data[0].employees,
+          email: user,
+        });
+        console.log(data);
+      }
+    }
+    fetchCompanyData();
+  }, []);
 
   function logOut() {
-    navigate("/");
+    logout();
   }
 
   function goToFormularPage() {
@@ -75,16 +105,19 @@ export default function Home() {
             Log Out
           </button>
           <div className="info-section">
-            <h2>{companyExample.name}</h2>
+            <h2>{company.name}</h2>
           </div>
           <div className="info-section">
-            <h3>Description: {companyExample.description}</h3>
+            <h3>Description: {company.description}</h3>
           </div>
           <div className="info-section">
-            <h3>Country: {companyExample.country}</h3>
+            <h3>Country: {company.country}</h3>
           </div>
           <div className="info-section">
-            <h3>E-mail contact: {companyExample.email}</h3>
+            <h3>Employees: {company.employees}</h3>
+          </div>
+          <div className="info-section">
+            <h3>E-mail contact: {company.email}</h3>
           </div>
           <hr />
           <button onClick={goToFormularPage}>add new job</button>
@@ -109,7 +142,7 @@ export default function Home() {
       <NewJobFormular
         showHomePage={setShowFormularPageTrue}
         addJob={addNewJob}
-        companyName={companyExample.name}
+        companyName={company.name}
       ></NewJobFormular>
     );
   } else if (showPage === Page.EditJob) {
