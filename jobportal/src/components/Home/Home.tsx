@@ -17,11 +17,6 @@ export default function Home({ logout, user }: LogProp) {
   const [jobsList, setJobsList] = useState<JobType[]>([]);
   const [showPage, setShowPage] = useState<string>(Page.Home);
   const [jobId, setJobId] = useState<number>(0);
-  // const [name, setName] = useState<string>("");
-  // const [description, setDescription] = useState<string>("");
-  // const [country, setCountry] = useState<string>("");
-  // const [employees, setEmployees] = useState<string>("");
-  // const [email, setEmail] = useState<string>("");
   const [company, setCompany] = useState<CompanyType>({
     name: "",
     description: "",
@@ -30,28 +25,45 @@ export default function Home({ logout, user }: LogProp) {
     email: "",
   });
 
-  useEffect(() => {
-    async function fetchCompanyData() {
-      const { error, data } = await supabase
-        .from("Company")
-        .select()
-        .eq("email", user);
-      if (error) {
-        console.log(`error: ${error}`);
-      }
-      if (data) {
-        setCompany({
-          name: data[0].name,
-          description: data[0].description,
-          country: data[0].country,
-          employees: data[0].employees,
-          email: user,
-        });
-        console.log(data);
-      }
+  async function fetchCompanyData() {
+    const { error, data } = await supabase
+      .from("Company")
+      .select()
+      .eq("email", user);
+    if (error) {
+      console.log(`error: ${error}`);
     }
+    if (data) {
+      setCompany({
+        name: data[0].name,
+        description: data[0].description,
+        country: data[0].country,
+        employees: data[0].employees,
+        email: user,
+      });
+    }
+  }
+
+  useEffect(() => {
     fetchCompanyData();
   }, []);
+
+  useEffect(() => {
+    async function fetchJobs() {
+      const { error, data } = await supabase
+        .from("Job")
+        .select()
+        .eq("company", company.name);
+      if (error) {
+        console.log(`error-message: ${error.message}`);
+      } else {
+        console.log(data);
+        const jobs: JobType[] = data as JobType[];
+        setJobsList(jobs);
+      }
+    }
+    fetchJobs();
+  }, [company.name]);
 
   function logOut() {
     logout();
@@ -91,7 +103,19 @@ export default function Home({ logout, user }: LogProp) {
     setJobsList(jobsList);
   }
 
-  function deleteJob(id: number) {
+  async function deleteJob(id: number) {
+    console.log(`id: ${id}`);
+    console.log(`company: ${company.name}`);
+    const { error } = await supabase
+      .from("Job")
+      .delete()
+      .eq("id", id)
+      .eq("company", company.name);
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(`erfolgreich...`);
+    }
     const newList = jobsList.filter((job) => job.id !== id);
     setJobsList(newList);
   }

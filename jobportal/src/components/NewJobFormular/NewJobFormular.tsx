@@ -2,6 +2,7 @@ import "./NewJobFormular.scss";
 import { useState } from "react";
 import { JobType } from "../../dataType/JobType";
 import { Page } from "../../dataType/enumPage";
+import { supabase } from "../../supabase-client ";
 
 type HomeProp = {
   showHomePage: (setHomeScreen: string) => void;
@@ -52,17 +53,25 @@ export default function NewJobFormular({
     showHomePage(Page.Home);
   }
 
+  async function saveJobToDB(job: JobType) {
+    const { error } = await supabase.from("Job").insert(job);
+    if (error) {
+      console.log(`folgender Fehler ist passiert`);
+      console.log(error);
+    }
+  }
+
   function saveTheJob() {
     const validationResult = validateInput(title, description, salary);
     if (validationResult) {
       const newJob: JobType = {
-        id: Math.random(),
+        id: Math.ceil(Math.random() * 100),
         title: title,
         description: description,
         salary: Number(salary),
         company: companyName,
-        publishedDay: new Date(),
       };
+      saveJobToDB(newJob);
       console.log(newJob);
       addJob(newJob);
       showHomePage(Page.Home);
