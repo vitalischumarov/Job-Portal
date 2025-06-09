@@ -7,6 +7,7 @@ import JobCard from "../JobCard/JobCard";
 import { Page } from "../../dataType/enumPage";
 import EditJob from "../EditJob/EditJob";
 import { supabase } from "../../supabase-client ";
+import { loadData } from "../database/database";
 
 type LogProp = {
   logout: () => void;
@@ -17,6 +18,7 @@ export default function Home({ logout, user }: LogProp) {
   const [jobsList, setJobsList] = useState<JobType[]>([]);
   const [showPage, setShowPage] = useState<string>(Page.Home);
   const [jobId, setJobId] = useState<number>(0);
+  const [jobsLoaded, setJobsLoaded] = useState<boolean>(false);
   const [company, setCompany] = useState<CompanyType>({
     name: "",
     description: "",
@@ -46,24 +48,27 @@ export default function Home({ logout, user }: LogProp) {
 
   useEffect(() => {
     fetchCompanyData();
-  }, []);
+  });
 
   useEffect(() => {
-    async function fetchJobs() {
-      const { error, data } = await supabase
-        .from("Job")
-        .select()
-        .eq("company", company.name);
-      if (error) {
-        console.log(`error-message: ${error.message}`);
-      } else {
-        console.log(data);
-        const jobs: JobType[] = data as JobType[];
-        setJobsList(jobs);
-      }
+    async function displayJobs() {
+      const jobs = await loadData(company.name);
+      setJobsList(jobs);
     }
-    fetchJobs();
+    displayJobs();
   }, [company.name]);
+
+  function updateJob(job: JobType) {
+    const newJobList: JobType[] = [];
+    for (let i = 0; i < jobsList.length; i++) {
+      if (jobsList[i].id === job.id) {
+        jobsList[i].title = job.title;
+        jobsList[i].description = job.description;
+        jobsList[i].salary = job.salary;
+      }
+      newJobList.push(jobsList[i]);
+    }
+  }
 
   function logOut() {
     logout();
@@ -92,16 +97,16 @@ export default function Home({ logout, user }: LogProp) {
     });
   }
 
-  function getChangedJob(job: JobType) {
-    for (let i = 0; i < jobsList.length; i++) {
-      if (jobsList[i].id === job.id) {
-        jobsList[i].title = job.title;
-        jobsList[i].description = job.description;
-        jobsList[i].salary = job.salary;
-      }
-    }
-    setJobsList(jobsList);
-  }
+  // function getChangedJob(job: JobType) {
+  //   for (let i = 0; i < jobsList.length; i++) {
+  //     if (jobsList[i].id === job.id) {
+  //       jobsList[i].title = job.title;
+  //       jobsList[i].description = job.description;
+  //       jobsList[i].salary = job.salary;
+  //     }
+  //   }
+  //   setJobsList(jobsList);
+  // }
 
   async function deleteJob(id: number) {
     console.log(`id: ${id}`);
@@ -175,7 +180,7 @@ export default function Home({ logout, user }: LogProp) {
       <EditJob
         job={job}
         showHomePage={setShowFormularPageTrue}
-        changeJobFunction={getChangedJob}
+        changeJobFunction={updateJob}
       ></EditJob>
     );
   }
