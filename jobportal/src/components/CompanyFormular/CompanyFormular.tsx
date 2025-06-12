@@ -1,3 +1,4 @@
+import "./CompanyFormular.scss";
 import { useParams } from "react-router";
 import { useInput } from "../../hooks/useInput";
 import { CompanyType } from "../../dataType/CompanyType";
@@ -61,37 +62,45 @@ export default function CompanyFormular() {
   }
 
   return (
-    <div>
-      <h3>E-Mail</h3>
-      {itemID}
-      <h3>Companyname:</h3>
-      <input
-        type="text"
-        value={companyname}
-        name="companyname"
-        onChange={typeCompanynameHandler}
-      ></input>
-      <h3>Description:</h3>
-      <textarea
-        value={description}
-        name="description"
-        onChange={typeDescriptionHandler}
-      ></textarea>
-      <h3>Country:</h3>
-      <input
-        type="text"
-        onChange={typeCountryHandler}
-        name="country"
-        value={country}
-      ></input>
-      <h3>Employees:</h3>
-      <input
-        type="number"
-        onChange={typeEmployeeHandler}
-        name="employee"
-        value={employee}
-      ></input>
-      <button onClick={inputValidation}>save</button>
+    <div className="companyF_app">
+      <div className="companyF_container">
+        <div className="companyF_formular">
+          <span className="companyF_text">Companyname:</span>
+          <input
+            type="text"
+            value={companyname}
+            name="companyname"
+            onChange={typeCompanynameHandler}
+            className="companyF_input"
+          ></input>
+          <span className="companyF_text">Description:</span>
+          <textarea
+            value={description}
+            name="description"
+            onChange={typeDescriptionHandler}
+            className="companyF_input"
+          ></textarea>
+          <span className="companyF_text">Country:</span>
+          <input
+            type="text"
+            onChange={typeCountryHandler}
+            name="country"
+            value={country}
+            className="companyF_input"
+          ></input>
+          <span className="companyF_text">Employees:</span>
+          <input
+            type="number"
+            onChange={typeEmployeeHandler}
+            name="employee"
+            value={employee}
+            className="companyF_input"
+          ></input>
+          <button onClick={inputValidation} className="companyF_btn">
+            save
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

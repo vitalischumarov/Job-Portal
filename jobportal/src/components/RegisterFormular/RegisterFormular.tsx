@@ -38,35 +38,38 @@ export default function RegisterFormular() {
       const emailName = email;
       setEmail("");
       setPassword("");
-      navigate(`/newCompany/${emailName}`); //hier muss ich die E-Mail adresse uebergeben.
+      navigate(`/newCompany/${emailName}`);
     }
   }
 
   return (
-    <div className="registration-container">
-      <div className="registration-form">
-        <h1>Account erstellen</h1>
-
-        <h2>E-Mail Adresse:</h2>
-        <input
-          type="email"
-          value={email}
-          onChange={typeEmailHandler}
-          placeholder="beispiel@email.com"
-        />
-
-        <h2>Passwort:</h2>
-        <input
-          type="password"
-          value={password}
-          onChange={typePasswordHandler}
-          placeholder="Mindestens 8 Zeichen"
-        />
-
-        <button onClick={inputValidation}>Registrieren</button>
-        <Link to="/" className="login-link">
-          Bereits registriert? Zum Login
-        </Link>
+    <div className="registration_container">
+      <div className="registration_form">
+        <h1 className="registration_title">Account erstellen</h1>
+        <div className="registration_field">
+          <span className="registration_text">E-Mail Adresse:</span>
+          <input
+            type="email"
+            value={email}
+            onChange={typeEmailHandler}
+            placeholder="beispiel@email.com"
+            className="registration_input"
+          />
+          <span className="registration_text">Passwort:</span>
+          <input
+            type="password"
+            value={password}
+            onChange={typePasswordHandler}
+            placeholder="Mindestens 8 Zeichen"
+            className="registration_input"
+          />
+          <button onClick={inputValidation} className="registration_btn">
+            Registrieren
+          </button>{" "}
+          <Link to="/" className="login-link">
+            Bereits registriert? Zum Login
+          </Link>
+        </div>
       </div>
     </div>
   );
