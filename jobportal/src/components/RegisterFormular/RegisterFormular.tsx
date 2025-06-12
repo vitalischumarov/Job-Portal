@@ -1,6 +1,8 @@
+import "./RegisterFormular.scss";
 import { useState } from "react";
 import { supabase } from "../../supabase-client ";
 import { useNavigate } from "react-router";
+import { Link } from "react-router";
 
 export default function RegisterFormular() {
   const [email, setEmail] = useState<string>("");
@@ -41,16 +43,31 @@ export default function RegisterFormular() {
   }
 
   return (
-    <div>
-      <h2>E-Mail Adresse:</h2>
-      <input type="text" value={email} onChange={typeEmailHandler}></input>
-      <h2>Password:</h2>
-      <input
-        type="password"
-        value={password}
-        onChange={typePasswordHandler}
-      ></input>
-      <button onClick={inputValidation}>Sign up</button>
+    <div className="registration-container">
+      <div className="registration-form">
+        <h1>Account erstellen</h1>
+
+        <h2>E-Mail Adresse:</h2>
+        <input
+          type="email"
+          value={email}
+          onChange={typeEmailHandler}
+          placeholder="beispiel@email.com"
+        />
+
+        <h2>Passwort:</h2>
+        <input
+          type="password"
+          value={password}
+          onChange={typePasswordHandler}
+          placeholder="Mindestens 8 Zeichen"
+        />
+
+        <button onClick={inputValidation}>Registrieren</button>
+        <Link to="/" className="login-link">
+          Bereits registriert? Zum Login
+        </Link>
+      </div>
     </div>
   );
 }

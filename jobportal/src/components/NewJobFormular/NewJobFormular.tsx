@@ -24,7 +24,7 @@ export default function NewJobFormular({
   }
 
   function typeDescriptionHandler(
-    event: React.ChangeEvent<HTMLTextAreaElement>,
+    event: React.ChangeEvent<HTMLTextAreaElement>
   ) {
     setDescription(event.target.value);
   }
@@ -36,7 +36,7 @@ export default function NewJobFormular({
   function validateInput(
     title: string,
     description: string,
-    salary: number | undefined,
+    salary: number | undefined
   ): boolean {
     if (salary === undefined) {
       return false;

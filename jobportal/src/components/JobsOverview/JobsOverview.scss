@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  gap: 18rem;
+
+  .jobCards {
+    h4 {
+      margin: 0;
+    }
+  }
+}

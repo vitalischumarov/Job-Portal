@@ -7,7 +7,8 @@ import JobCard from "../JobCard/JobCard";
 import { Page } from "../../dataType/enumPage";
 import EditJob from "../EditJob/EditJob";
 import { supabase } from "../../supabase-client ";
-import { loadData } from "../database/database";
+import { loadData } from "../../database/database";
+import { fetchCompanyDataByEmail } from "../../database/database";
 
 type LogProp = {
   logout: () => void;
@@ -18,7 +19,6 @@ export default function Home({ logout, user }: LogProp) {
   const [jobsList, setJobsList] = useState<JobType[]>([]);
   const [showPage, setShowPage] = useState<string>(Page.Home);
   const [jobId, setJobId] = useState<number>(0);
-  const [jobsLoaded, setJobsLoaded] = useState<boolean>(false);
   const [company, setCompany] = useState<CompanyType>({
     name: "",
     description: "",
@@ -27,27 +27,37 @@ export default function Home({ logout, user }: LogProp) {
     email: "",
   });
 
-  async function fetchCompanyData() {
-    const { error, data } = await supabase
-      .from("Company")
-      .select()
-      .eq("email", user);
-    if (error) {
-      console.log(`error: ${error}`);
-    }
-    if (data) {
+  // async function fetchCompanyData() {
+  //   const { error, data } = await supabase
+  //     .from("Company")
+  //     .select()
+  //     .eq("email", user);
+  //   if (error) {
+  //     console.log(`error: ${error}`);
+  //   }
+  //   if (data) {
+  //     setCompany({
+  //       name: data[0].name,
+  //       description: data[0].description,
+  //       country: data[0].country,
+  //       employees: data[0].employees,
+  //       email: user,
+  //     });
+  //   }
+  // }
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchCompanyDataByEmail(user);
       setCompany({
-        name: data[0].name,
-        description: data[0].description,
-        country: data[0].country,
-        employees: data[0].employees,
+        name: data.name,
+        description: data.description,
+        country: data.country,
+        employees: Number(data.employees),
         email: user,
       });
     }
-  }
-
-  useEffect(() => {
-    fetchCompanyData();
+    fetchData();
   });
 
   useEffect(() => {
@@ -97,17 +107,6 @@ export default function Home({ logout, user }: LogProp) {
     });
   }
 
-  // function getChangedJob(job: JobType) {
-  //   for (let i = 0; i < jobsList.length; i++) {
-  //     if (jobsList[i].id === job.id) {
-  //       jobsList[i].title = job.title;
-  //       jobsList[i].description = job.description;
-  //       jobsList[i].salary = job.salary;
-  //     }
-  //   }
-  //   setJobsList(jobsList);
-  // }
-
   async function deleteJob(id: number) {
     console.log(`id: ${id}`);
     console.log(`company: ${company.name}`);
@@ -127,9 +126,8 @@ export default function Home({ logout, user }: LogProp) {
 
   if (showPage === Page.Home) {
     return (
-      <div className="app">
-        <div className="container">
-          {" "}
+      <div className="home_app">
+        <div className="home_container">
           <button className="logout-btn" onClick={logOut}>
             Log Out
           </button>
@@ -149,19 +147,17 @@ export default function Home({ logout, user }: LogProp) {
             <h3>E-mail contact: {company.email}</h3>
           </div>
           <hr />
-          <button onClick={goToFormularPage}>add new job</button>
+          <button onClick={goToFormularPage}>Add new job</button>
           <div className="jobList">
-            {jobsList.map((job) => {
-              return (
-                <div>
-                  <JobCard
-                    job={job}
-                    clickFunction={clickOnJobCard}
-                    deleteFunction={deleteJob}
-                  ></JobCard>
-                </div>
-              );
-            })}
+            {jobsList.map((job) => (
+              <div key={job.id}>
+                <JobCard
+                  job={job}
+                  clickFunction={clickOnJobCard}
+                  deleteFunction={deleteJob}
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>

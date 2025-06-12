@@ -2,7 +2,7 @@ import "./EditJob.scss";
 import { JobType } from "../../dataType/JobType";
 import { Page } from "../../dataType/enumPage";
 import { useState } from "react";
-import { updateData } from "../database/database";
+import { updateData } from "../../database/database";
 
 type HomeProp = {
   job: JobType | undefined;
@@ -18,7 +18,7 @@ export default function EditJob({
   const [editPossible, setEditPossible] = useState<boolean>(false);
   const [newTitle, setNewTitle] = useState<string | undefined>(job?.title);
   const [newDescription, setNewDescription] = useState<string | undefined>(
-    job?.description,
+    job?.description
   );
   const [newSalary, setNewSalary] = useState<number | undefined>(job?.salary);
 
@@ -27,7 +27,7 @@ export default function EditJob({
   }
 
   function typeDescriptionHandler(
-    event: React.ChangeEvent<HTMLTextAreaElement>,
+    event: React.ChangeEvent<HTMLTextAreaElement>
   ) {
     setNewDescription(event.target.value);
   }

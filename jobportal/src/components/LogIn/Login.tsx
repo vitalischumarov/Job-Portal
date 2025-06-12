@@ -8,7 +8,7 @@ export default function LogIn() {
   const [email, setEmail] = useState("vitali@ccc.ch");
   const [password, setPassword] = useState("123456789");
   const [isLogedIn, setIsLogedIn] = useState<boolean>(false);
-  const [sessionUser, setSessionUser] = useState<String>("");
+  const [sessionUser, setSessionUser] = useState<string>("");
 
   async function login() {
     const { error, data } = await supabase.auth.signInWithPassword({
@@ -41,18 +41,37 @@ export default function LogIn() {
   if (!isLogedIn) {
     return (
       <div className="app">
-        <input
-          value={email}
-          placeholder="email"
-          onChange={typeEmailHandler}
-        ></input>
-        <input
-          value={password}
-          placeholder="password"
-          onChange={typePasswordHandler}
-        ></input>
-        <button onClick={login}>Login</button>
-        <Link to={"/registrieren"}>Sign up</Link>
+        <div className="login_app">
+          <h1>LOGIN</h1>
+          <div className="login_details">
+            <span className="login_text">E-Mail Adresse</span>
+            <input
+              value={email}
+              placeholder="Email"
+              onChange={typeEmailHandler}
+              type="email"
+              className="login_input"
+            />
+            <span className="login_text">Passwort</span>
+            <input
+              value={password}
+              placeholder="Passwort"
+              onChange={typePasswordHandler}
+              type="password"
+              className="login_input"
+            />
+            <button onClick={login} className="login_btn">
+              LOG IN
+            </button>
+            <Link to={"/registrieren"} className="signup-link">
+              <span className="login_link">Noch kein Konto? Registrieren</span>
+            </Link>
+            <Link to={"/jobsOverview"}>
+              {" "}
+              <span className="login_link">weiter zu den Jobs</span>
+            </Link>
+          </div>
+        </div>
       </div>
     );
   } else {

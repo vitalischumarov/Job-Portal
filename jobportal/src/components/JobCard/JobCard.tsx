@@ -13,21 +13,12 @@ export default function JobCard({
   deleteFunction,
 }: HomeProp) {
   return (
-    <div>
-      <div
-        onClick={() => {
-          clickFunction(job.id);
-        }}
-        className="job-card"
-      >
-        <h3>Title: {job.title}</h3>
+    <div className="job-card-container">
+      <div onClick={() => clickFunction(job.id)} className="job-card">
+        <h3>{job.title}</h3>
       </div>
-      <button
-        onClick={() => {
-          deleteFunction(job.id);
-        }}
-      >
-        delete job
+      <button onClick={() => deleteFunction(job.id)} className="delete-job-btn">
+        Delete Job
       </button>
     </div>
   );

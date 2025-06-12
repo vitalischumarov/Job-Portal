@@ -1,0 +1,58 @@
+.app {
+  background-color: rgb(249 247 248);
+  height: 100vh;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+
+  .login_app {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding: 3rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .login_text {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-family: Courier New;
+  }
+
+  .login_input {
+    height: 2.5rem;
+    border-color: rgb(217 217 220);
+    border-radius: 0.5rem;
+    border-width: 0.1rem;
+    border-style: solid;
+    padding-left: 0.3rem;
+  }
+
+  .login_details {
+    display: flex;
+    flex-direction: column;
+    width: 20rem;
+  }
+
+  .login_btn {
+    background-color: rgb(39 115 206);
+    color: white;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  a {
+    color: rgb(14 121 167);
+    text-decoration: none;
+    font-family: "Courier New", Courier, monospace;
+    padding: 0.5rem;
+  }
+}
