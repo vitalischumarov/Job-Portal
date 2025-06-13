@@ -22,11 +22,13 @@ export default function JobsOverview() {
         {jobList.map((job) => {
           return (
             <div
+              className="jobCard"
               onClick={() => {
                 setShowJob(job.id);
               }}
             >
-              <h4>{job.title}</h4>
+              <span>{job.title}</span>
+              <span>{job.company}</span>
             </div>
           );
         })}

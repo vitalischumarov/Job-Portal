@@ -27,25 +27,6 @@ export default function Home({ logout, user }: LogProp) {
     email: "",
   });
 
-  // async function fetchCompanyData() {
-  //   const { error, data } = await supabase
-  //     .from("Company")
-  //     .select()
-  //     .eq("email", user);
-  //   if (error) {
-  //     console.log(`error: ${error}`);
-  //   }
-  //   if (data) {
-  //     setCompany({
-  //       name: data[0].name,
-  //       description: data[0].description,
-  //       country: data[0].country,
-  //       employees: data[0].employees,
-  //       email: user,
-  //     });
-  //   }
-  // }
-
   useEffect(() => {
     async function fetchData() {
       const data = await fetchCompanyDataByEmail(user);
@@ -127,27 +108,42 @@ export default function Home({ logout, user }: LogProp) {
   if (showPage === Page.Home) {
     return (
       <div className="home_app">
-        <div className="home_container">
-          <button className="logout-btn" onClick={logOut}>
-            Log Out
-          </button>
-          <div className="info-section">
-            <h2>{company.name}</h2>
-          </div>
-          <div className="info-section">
-            <h3>Description: {company.description}</h3>
-          </div>
-          <div className="info-section">
-            <h3>Country: {company.country}</h3>
-          </div>
-          <div className="info-section">
-            <h3>Employees: {company.employees}</h3>
-          </div>
-          <div className="info-section">
-            <h3>E-mail contact: {company.email}</h3>
+        <div className="">
+          <div className="company-profile-container">
+            <button className="logout-btn" onClick={logOut}>
+              Log Out
+            </button>
+
+            <div className="company-info-card">
+              <div className="info-section">
+                <h2 className="company-name">{company.name}</h2>
+              </div>
+
+              <div className="info-section">
+                <p className="info-label">Description</p>
+                <p className="info-value">{company.description}</p>
+              </div>
+
+              <div className="info-section">
+                <p className="info-label">Country</p>
+                <p className="info-value">{company.country}</p>
+              </div>
+
+              <div className="info-section">
+                <p className="info-label">Employees</p>
+                <p className="info-value">{company.employees}</p>
+              </div>
+
+              <div className="info-section">
+                <p className="info-label">E-mail contact</p>
+                <p className="info-value">{company.email}</p>
+              </div>
+            </div>
           </div>
           <hr />
-          <button onClick={goToFormularPage}>Add new job</button>
+          <button onClick={goToFormularPage} className="add-job-btn">
+            Add new job
+          </button>
           <div className="jobList">
             {jobsList.map((job) => (
               <div key={job.id}>

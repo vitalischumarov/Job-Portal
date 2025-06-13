@@ -15,7 +15,9 @@ export default function JobCard({
   return (
     <div className="job-card-container">
       <div onClick={() => clickFunction(job.id)} className="job-card">
-        <h3>{job.title}</h3>
+        <div className="job-card-content">
+          <h3 className="job-card-title">{job.title}</h3>
+        </div>
       </div>
       <button onClick={() => deleteFunction(job.id)} className="delete-job-btn">
         Delete Job

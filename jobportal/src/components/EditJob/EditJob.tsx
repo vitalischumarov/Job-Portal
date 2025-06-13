@@ -78,32 +78,66 @@ export default function EditJob({
 
   if (!editPossible) {
     return (
-      <div>
-        <button onClick={goBackToHomeScreen}>back to home screen</button>
-        <button onClick={editJob}>edit job</button>
-        {newTitle}
-        <br></br>
-        {newDescription}
-        <br></br>
-        {newSalary}
-        <br></br>
+      <div className="job-detail-container">
+        <div className="job-detail-actions">
+          <button onClick={goBackToHomeScreen} className="back-btn">
+            Back to home screen
+          </button>
+          <button onClick={editJob} className="edit-btn">
+            Edit job
+          </button>
+        </div>
+
+        <div className="job-detail-content">
+          <div className="detail-field">{newTitle}</div>
+          <div className="detail-field">{newDescription}</div>
+          <div className="detail-field">{newSalary}</div>
+        </div>
       </div>
     );
   } else {
     return (
-      <div>
-        <button onClick={goBackToHomeScreen}>back to home screen</button>
-        <button onClick={editJob}>edit job</button>
-        <button onClick={inputValidation}>save changed</button>
-        <input value={newTitle} onChange={typeTitleHandler}></input>
-        <br></br>
-        <textarea
-          value={newDescription}
-          onChange={typeDescriptionHandler}
-        ></textarea>
-        <br></br>
-        <input value={newSalary} onChange={typeSalaryHandler}></input>
-        <br></br>
+      <div className="job-edit-container">
+        <div className="job-edit-actions">
+          <button onClick={goBackToHomeScreen} className="back-btn">
+            Back to home screen
+          </button>
+          <button onClick={editJob} className="edit-btn">
+            Edit job
+          </button>
+          <button onClick={inputValidation} className="save-btn">
+            Save changes
+          </button>
+        </div>
+
+        <div className="job-edit-form">
+          <div className="form-group">
+            <label className="form-label">Job Title</label>
+            <input
+              value={newTitle}
+              onChange={typeTitleHandler}
+              className="form-input"
+            />
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">Description</label>
+            <textarea
+              value={newDescription}
+              onChange={typeDescriptionHandler}
+              className="form-textarea"
+            />
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">Salary</label>
+            <input
+              value={newSalary}
+              onChange={typeSalaryHandler}
+              className="form-input"
+            />
+          </div>
+        </div>
       </div>
     );
   }

@@ -1,3 +1,4 @@
+import "./DetailJob.scss";
 import { useEffect, useState } from "react";
 import { loadJobByID } from "../../database/database";
 import { fetchCompanyData } from "../../database/database";
@@ -47,19 +48,40 @@ export default function DetailJob({ jobId }: jobsOverviewProp) {
   }, [job]);
 
   return (
-    <div>
-      <div>
-        <div>{job?.id}</div>
-        <div>{job?.title}</div>
-        <div>{job?.description}</div>
-        <div>{job?.salary}</div>
-        <h4></h4>
+    <div className="job-detail-container">
+      <div className="detailJob">
+        <div className="job-header-wrapper">
+          <div className="detailJob_title detailJob_text">
+            <h1 className="job-main-title">{job?.title}</h1>
+          </div>
+        </div>
+
+        <div className="job-content-wrapper">
+          <div className="detailJob_description detailJob_text">
+            <div className="description-content">{job?.description}</div>
+          </div>
+
+          <div className="job-meta-wrapper">
+            <div className="detailJob_salary detailJob_text">
+              <div className="salary-content">Salary: {job?.salary}</div>
+            </div>
+          </div>
+        </div>
+
+        <h4 className="job-divider"></h4>
       </div>
-      <div>
-        <h3>{company?.name}</h3>
-        <h3>{company?.description}</h3>
-        <h3>{company?.country}</h3>
-        <h3>{company?.email}</h3>
+
+      <div className="company_info">
+        <div className="company-content-wrapper">
+          <div className="company-description-block">
+            <span>Name: {company?.name}</span>
+            <span>Description: {company?.description}</span>
+          </div>
+          <div className="company-contact-block">
+            <span className="company-country">{company?.country}</span>
+            <span className="company-email">{company?.email}</span>
+          </div>
+        </div>
       </div>
     </div>
   );
