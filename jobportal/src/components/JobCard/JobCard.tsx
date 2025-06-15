@@ -20,7 +20,7 @@ export default function JobCard({
         </div>
       </div>
       <button onClick={() => deleteFunction(job.id)} className="delete-job-btn">
-        Delete Job
+        X
       </button>
     </div>
   );

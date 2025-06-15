@@ -109,51 +109,55 @@ export default function Home({ logout, user }: LogProp) {
     return (
       <div className="home_app">
         <div className="">
-          <div className="company-profile-container">
-            <button className="logout-btn" onClick={logOut}>
-              Log Out
-            </button>
+          <button className="logout_btn" onClick={logOut}>
+            Log Out
+          </button>
+          <div className="company_profile_container">
+            <div className="info-section">
+              <h2 className="company-name">{company.name}</h2>
+            </div>
 
-            <div className="company-info-card">
-              <div className="info-section">
-                <h2 className="company-name">{company.name}</h2>
-              </div>
+            <div className="info-section">
+              <p className="info-value">{company.description}</p>
+            </div>
 
-              <div className="info-section">
-                <p className="info-label">Description</p>
-                <p className="info-value">{company.description}</p>
-              </div>
+            <div className="info-section">
+              <p className="info-value">
+                <b>Country: </b>
+                {company.country}
+              </p>
+            </div>
 
-              <div className="info-section">
-                <p className="info-label">Country</p>
-                <p className="info-value">{company.country}</p>
-              </div>
+            <div className="info-section">
+              <p className="info-value">
+                <b>Employees: </b>
+                {company.employees}
+              </p>
+            </div>
 
-              <div className="info-section">
-                <p className="info-label">Employees</p>
-                <p className="info-value">{company.employees}</p>
-              </div>
-
-              <div className="info-section">
-                <p className="info-label">E-mail contact</p>
-                <p className="info-value">{company.email}</p>
-              </div>
+            <div className="info-section">
+              <p className="info-value">
+                <b>E-mail contact: </b>
+                {company.email}
+              </p>
             </div>
           </div>
-          <hr />
-          <button onClick={goToFormularPage} className="add-job-btn">
-            Add new job
-          </button>
-          <div className="jobList">
-            {jobsList.map((job) => (
-              <div key={job.id}>
-                <JobCard
-                  job={job}
-                  clickFunction={clickOnJobCard}
-                  deleteFunction={deleteJob}
-                />
-              </div>
-            ))}
+          <div className="home_jobListing">
+            <h2>Unsere Stellenangebote</h2>
+            <button onClick={goToFormularPage} className="add-job-btn">
+              Add new job
+            </button>
+            <div className="jobList">
+              {jobsList.map((job) => (
+                <div key={job.id}>
+                  <JobCard
+                    job={job}
+                    clickFunction={clickOnJobCard}
+                    deleteFunction={deleteJob}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
