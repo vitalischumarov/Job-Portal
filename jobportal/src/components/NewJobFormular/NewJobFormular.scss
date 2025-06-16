@@ -1,0 +1,72 @@
+.main {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.formular_btn {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #357abd;
+}
+
+.formular {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.formularText {
+  margin: 0;
+  font-weight: 600;
+  color: #333;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+  padding: 10px 14px;
+  border: 1.8px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  resize: vertical;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+  border-color: #4a90e2;
+  outline: none;
+  box-shadow: 0 0 8px rgba(74, 144, 226, 0.4);
+}
+
+textarea {
+  min-height: 100px;
+  font-family: inherit;
+}
+
+.formularButton {
+  align-self: flex-start;
+  background-color: #27ae60;
+  padding: 12px 24px;
+  font-weight: 700;
+}
+
+.formularButton:hover {
+  background-color: #1e8449;
+}
