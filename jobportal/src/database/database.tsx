@@ -33,7 +33,11 @@ export async function loadData(companyName: string) {
     console.log("daten wurden geladen");
     console.log(data);
     const jobs: JobType[] = data as JobType[];
-    return jobs;
+    if (jobs.length === 0) {
+      return [];
+    } else {
+      return jobs;
+    }
   }
 }
 
@@ -43,8 +47,6 @@ export async function loadAllJobs() {
     console.log(`error-message: ${error.message}`);
     return [];
   } else {
-    // console.log("daten wurden geladen");
-    // console.log(data);
     const jobs: JobType[] = data as JobType[];
     return jobs;
   }

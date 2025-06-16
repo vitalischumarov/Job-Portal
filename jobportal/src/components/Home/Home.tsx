@@ -149,12 +149,13 @@ export default function Home({ logout, user }: LogProp) {
             </button>
             <div className="jobList">
               {jobsList.map((job) => (
-                <div key={job.id}>
-                  <JobCard
-                    job={job}
-                    clickFunction={clickOnJobCard}
-                    deleteFunction={deleteJob}
-                  />
+                <div
+                  key={job.id}
+                  onClick={() => {
+                    clickOnJobCard(job.id);
+                  }}
+                >
+                  <JobCard job={job} deleteFunction={deleteJob} />
                 </div>
               ))}
             </div>

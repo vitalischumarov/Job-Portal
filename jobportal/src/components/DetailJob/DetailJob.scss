@@ -1,0 +1,107 @@
+.job-detail-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+  font-family: sans-serif;
+  color: #333;
+
+  .detailJob {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+    .job-header-wrapper {
+      margin-bottom: 1rem;
+
+      .job-main-title {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin: 0;
+        color: #222;
+      }
+    }
+
+    .job-content-wrapper {
+      .detailJob_description {
+        margin-bottom: 1rem;
+
+        .description-content {
+          font-size: 1rem;
+          line-height: 1.5;
+        }
+      }
+
+      .job-meta-wrapper {
+        .detailJob_salary {
+          background: #f0f4ff;
+          border-left: 4px solid #2563eb;
+          padding: 0.5rem 1rem;
+          font-weight: 500;
+          color: #2563eb;
+        }
+      }
+    }
+
+    .job-divider {
+      height: 1px;
+      background: #eee;
+      margin: 2rem 0 0;
+    }
+  }
+
+  .company_info {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 0.75rem;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    margin-top: 2rem;
+
+    .company-content-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+
+      @media (min-width: 600px) {
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .company-description-block,
+      .company-contact-block {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        span {
+          font-size: 0.95rem;
+          color: #374151;
+          line-height: 1.4;
+
+          &::before {
+            content: "•";
+            margin-right: 0.5ch;
+            color: #f59e0b;
+          }
+        }
+      }
+
+      .company-country {
+        font-weight: 600;
+        color: #1f2937;
+      }
+
+      .company-email {
+        color: #2563eb;
+        text-decoration: underline;
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

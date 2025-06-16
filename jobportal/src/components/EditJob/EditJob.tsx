@@ -78,63 +78,61 @@ export default function EditJob({
 
   if (!editPossible) {
     return (
-      <div className="job-detail-container">
-        <div className="job-detail-actions">
-          <button onClick={goBackToHomeScreen} className="back-btn">
-            Back to home screen
+      <div className="edit_container">
+        <div className="">
+          <button onClick={goBackToHomeScreen} className="edit_back_btn">
+            back
           </button>
-          <button onClick={editJob} className="edit-btn">
+          <button onClick={editJob} className="edit_btn">
             Edit job
           </button>
         </div>
 
-        <div className="job-detail-content">
-          <div className="detail-field">{newTitle}</div>
-          <div className="detail-field">{newDescription}</div>
-          <div className="detail-field">{newSalary}</div>
+        <div className="edit_text_container">
+          <div className="edit_text">Title: {newTitle}</div>
+          <div className="edit_text">Description: {newDescription}</div>
+          <div className="edit_text">Salary: {newSalary}</div>
         </div>
       </div>
     );
   } else {
     return (
-      <div className="job-edit-container">
-        <div className="job-edit-actions">
-          <button onClick={goBackToHomeScreen} className="back-btn">
+      <div className="edit_container">
+        <div className="">
+          <button onClick={goBackToHomeScreen} className="edit_back_btn">
             Back to home screen
           </button>
-          <button onClick={editJob} className="edit-btn">
+          <button onClick={editJob} className="edit_btn">
             Edit job
           </button>
-          <button onClick={inputValidation} className="save-btn">
+          <button onClick={inputValidation} className="edit_save_btn">
             Save changes
           </button>
         </div>
 
-        <div className="job-edit-form">
-          <div className="form-group">
-            <label className="form-label">Job Title</label>
+        <div className="">
+          <div className="">
             <input
               value={newTitle}
               onChange={typeTitleHandler}
-              className="form-input"
+              className="edit_input edit_title"
             />
           </div>
 
-          <div className="form-group">
-            <label className="form-label">Description</label>
+          <div className="">
             <textarea
               value={newDescription}
               onChange={typeDescriptionHandler}
-              className="form-textarea"
+              className="edit_input"
+              autoFocus
             />
           </div>
 
-          <div className="form-group">
-            <label className="form-label">Salary</label>
+          <div className="">
             <input
               value={newSalary}
               onChange={typeSalaryHandler}
-              className="form-input"
+              className="edit_input"
             />
           </div>
         </div>

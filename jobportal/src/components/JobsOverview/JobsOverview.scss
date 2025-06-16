@@ -1,0 +1,26 @@
+.overview_container {
+  display: flex;
+  gap: 3rem;
+  padding-top: 1rem;
+  padding-left: 1rem;
+}
+
+.jobCards {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.jobCard {
+  padding: 1rem 2rem 1rem 2rem;
+  border: 1px solid black;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.jobCard:hover {
+  border: 2px solid gray;
+}

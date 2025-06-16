@@ -17,7 +17,7 @@ export default function JobsOverview() {
   }, []);
 
   return (
-    <div className="container">
+    <div className="overview_container">
       <div className="jobCards">
         {jobList.map((job) => {
           return (

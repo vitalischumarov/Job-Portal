@@ -72,14 +72,15 @@ export default function DetailJob({ jobId }: jobsOverviewProp) {
       </div>
 
       <div className="company_info">
+        <h3>Unternehmensinformationen</h3>
         <div className="company-content-wrapper">
           <div className="company-description-block">
             <span>Name: {company?.name}</span>
             <span>Description: {company?.description}</span>
           </div>
           <div className="company-contact-block">
-            <span className="company-country">{company?.country}</span>
-            <span className="company-email">{company?.email}</span>
+            <span className="company-country">Country: {company?.country}</span>
+            <span className="company-email">Contact: {company?.email}</span>
           </div>
         </div>
       </div>
