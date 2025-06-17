@@ -14,7 +14,7 @@ $shadow-m: 0 4px 14px rgba(0, 0, 0, 0.05);
   align-items: flex-start;
   padding: 3rem 1rem;
   background: $clr-bg;
-  position: relative; // für das Logout‑Button‑Positioning
+  position: relative;
 
   .logout_btn {
     position: absolute;
@@ -29,15 +29,11 @@ $shadow-m: 0 4px 14px rgba(0, 0, 0, 0.05);
     cursor: pointer;
     box-shadow: $shadow-m;
     transition: background 0.15s;
-
-    &:hover {
-      background: darken($clr-primary, 8%);
-    }
   }
 
   .company_profile_container {
     width: 100%;
-    max-width: 42rem; // ≈ 672 px
+    max-width: 42rem;
     background: $clr-card;
     border-radius: $radius-m;
     box-shadow: $shadow-m;
